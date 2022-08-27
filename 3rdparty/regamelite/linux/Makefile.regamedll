@@ -1,0 +1,236 @@
+#
+# HL game library Makefile for x86 Linux
+#
+# Feb 2001 by Leon Hartwig (hartwig@valvesoftware.com)
+#
+
+HLDLL_SRC_DIR=$(SOURCE_DIR)/dlls
+HLWPN_SRC_DIR=$(HLDLL_SRC_DIR)/wpn_shared
+ENGINE_SRC_DIR=$(SOURCE_DIR)/engine
+PM_SRC_DIR=$(SOURCE_DIR)/pm_shared
+GAME_SHARED_SRC_DIR=$(SOURCE_DIR)/game_shared
+
+HLDLL_OBJ_DIR=$(BUILD_OBJ_DIR)/regamedll
+HLWPN_OBJ_DIR=$(HLDLL_OBJ_DIR)/wpn_shared
+PM_OBJ_DIR=$(HLDLL_OBJ_DIR)/pm_shared
+GAME_SHARED_OBJ_DIR=$(HLDLL_OBJ_DIR)/game_shared
+PUBLIC_OBJ_DIR=$(HLDLL_OBJ_DIR)/public
+ENGINE_OBJ_DIR=$(HLDLL_OBJ_DIR)/engine
+#CFLAGS=$(BASE_CFLAGS) $(ARCH_CFLAGS) $(SHLIBCFLAGS) -DCLIENT_WEAPONS
+CFLAGS=$(BASE_CFLAGS)  $(ARCH_CFLAGS)  -DCLIENT_WEAPONS -Dstricmp=strcasecmp -D_strnicmp=strncasecmp -Dstrnicmp=strncasecmp -D_snprintf=snprintf -D_stricmp=strcasecmp -D_vsnprintf=vsnprintf -D_strdup=strdup -D_write=write -D_close=close -Wl,--no-undefined
+#-O3 -ffast-math -fno-strength-reduce
+
+HLDLL_INCLUDEDIRS=-I$(ENGINE_SRC_DIR) -I$(COMMON_SRC_DIR) -I$(PM_SRC_DIR) -I$(GAME_SHARED_SRC_DIR) -I$(PUBLIC_SRC_DIR) -I$(HLDLL_SRC_DIR) -I$(SOURCE_DIR) -I$(PM_SRC_DIR)
+HLWPN_INCLUDEDIRS=-I$(HLDLL_SRC_DIR) -I$(ENGINE_SRC_DIR) -I$(COMMON_SRC_DIR) -I$(PM_SRC_DIR) -I$(PUBLIC_SRC_DIR) -I$(HLDLL_SRC_DIR) -I$(SOURCE_DIR) -I$(PM_SRC_DIR)
+PM_INCLUDEDIRS=-I$(HLDLL_SRC_DIR) -I$(ENGINE_SRC_DIR) -I$(COMMON_SRC_DIR) -I$(PM_SRC_DIR) -I$(PUBLIC_SRC_DIR) -I$(HLDLL_SRC_DIR) -I$(SOURCE_DIR) -I$(PM_SRC_DIR)
+GAME_SHARED_INCLUDEDIRS=-I$(HLDLL_SRC_DIR) -I$(ENGINE_SRC_DIR) -I$(COMMON_SRC_DIR) -I$(PM_SRC_DIR) -I$(PUBLIC_SRC_DIR) -I$(HLDLL_SRC_DIR) -I$(SOURCE_DIR) -I$(PM_SRC_DIR)
+PUBLIC_INCLUDEDIRS=-I$(HLDLL_SRC_DIR) -I$(ENGINE_SRC_DIR) -I$(COMMON_SRC_DIR) -I$(PM_SRC_DIR) -I$(PUBLIC_SRC_DIR) -I$(HLDLL_SRC_DIR) -I$(SOURCE_DIR) -I$(PM_SRC_DIR)
+ENGINE_INCLUDEDIRS=-I$(HLDLL_SRC_DIR) -I$(ENGINE_SRC_DIR) -I$(COMMON_SRC_DIR) -I$(PM_SRC_DIR) -I$(PUBLIC_SRC_DIR) -I$(HLDLL_SRC_DIR) -I$(SOURCE_DIR) -I$(PM_SRC_DIR)
+
+LDFLAGS= -lm -lstdc++ -ldl
+ifeq ($(OS),Darwin)
+WL_UNDEFINED=
+else
+WL_UNDEFINED= -Wl,--no-undefined
+endif
+
+DO_HLDLL_CC=$(CC) $(HLDLL_INCLUDEDIRS) $(CFLAGS) -o $@ -c $<
+DO_HLWPN_CC=$(CC) $(HLWPN_INCLUDEDIRS) $(CFLAGS) -o $@ -c $<
+DO_PM_CC=$(CC) $(PM_INCLUDEDIRS) $(CFLAGS) -o $@ -c $<
+DO_GAME_SHARED_CC=$(CC) $(GAME_SHARED_INCLUDEDIRS) $(CFLAGS) -o $@ -c $<
+DO_PUBLIC_CC=$(CC) $(PUBLIC_INCLUDEDIRS) $(CFLAGS) -o $@ -c $<
+DO_ENGINE_CC=$(CC) $(ENGINE_INCLUDEDIRS) $(CFLAGS) -o $@ -c $<
+
+#####################################################################
+
+HLDLL_OBJS = \
+	$(HLDLL_OBJ_DIR)/airtank.o \
+	$(HLDLL_OBJ_DIR)/ammo.o \
+	$(HLDLL_OBJ_DIR)/animating.o \
+	$(HLDLL_OBJ_DIR)/animation.o \
+	$(HLDLL_OBJ_DIR)/bmodels.o \
+	$(HLDLL_OBJ_DIR)/buttons.o \
+	$(HLDLL_OBJ_DIR)/career_tasks.o \
+	$(HLDLL_OBJ_DIR)/cbase.o \
+	$(HLDLL_OBJ_DIR)/client.o \
+	$(HLDLL_OBJ_DIR)/combat.o \
+	$(HLDLL_OBJ_DIR)/debug.o \
+	$(HLDLL_OBJ_DIR)/doors.o \
+	$(HLDLL_OBJ_DIR)/effects.o \
+	$(HLDLL_OBJ_DIR)/explode.o \
+	$(HLDLL_OBJ_DIR)/func_break.o \
+	$(HLDLL_OBJ_DIR)/func_tank.o \
+	$(HLDLL_OBJ_DIR)/game.o \
+	$(HLDLL_OBJ_DIR)/gamerules.o \
+	$(HLDLL_OBJ_DIR)/ggrenade.o \
+	$(HLDLL_OBJ_DIR)/globals.o \
+	$(HLDLL_OBJ_DIR)/h_ai.o \
+	$(HLDLL_OBJ_DIR)/h_battery.o \
+	$(HLDLL_OBJ_DIR)/h_cycler.o \
+	$(HLDLL_OBJ_DIR)/healthkit.o \
+	$(HLDLL_OBJ_DIR)/h_export.o \
+	$(HLDLL_OBJ_DIR)/hintmessage.o \
+	$(HLDLL_OBJ_DIR)/items.o \
+	$(HLDLL_OBJ_DIR)/lights.o \
+	$(HLDLL_OBJ_DIR)/maprules.o \
+	$(HLDLL_OBJ_DIR)/mortar.o \
+	$(HLDLL_OBJ_DIR)/mpstubb.o \
+	$(HLDLL_OBJ_DIR)/multiplay_gamerules.o \
+	$(HLDLL_OBJ_DIR)/observer.o \
+	$(HLDLL_OBJ_DIR)/pathcorner.o \
+	$(HLDLL_OBJ_DIR)/plane.o \
+	$(HLDLL_OBJ_DIR)/plats.o \
+	$(HLDLL_OBJ_DIR)/player.o \
+	$(HLDLL_OBJ_DIR)/singleplay_gamerules.o \
+	$(HLDLL_OBJ_DIR)/skill.o \
+	$(HLDLL_OBJ_DIR)/sound.o \
+	$(HLDLL_OBJ_DIR)/soundent.o \
+	$(HLDLL_OBJ_DIR)/spectator.o \
+	$(HLDLL_OBJ_DIR)/subs.o \
+	$(HLDLL_OBJ_DIR)/training_gamerules.o \
+	$(HLDLL_OBJ_DIR)/triggers.o \
+	$(HLDLL_OBJ_DIR)/tutor_base_states.o \
+	$(HLDLL_OBJ_DIR)/tutor_base_tutor.o \
+	$(HLDLL_OBJ_DIR)/tutor.o \
+	$(HLDLL_OBJ_DIR)/tutor_cs_states.o \
+	$(HLDLL_OBJ_DIR)/tutor_cs_tutor.o \
+	$(HLDLL_OBJ_DIR)/util.o \
+	$(HLDLL_OBJ_DIR)/vehicle.o \
+	$(HLDLL_OBJ_DIR)/weapons.o \
+	$(HLDLL_OBJ_DIR)/weapontype.o \
+	$(HLDLL_OBJ_DIR)/world.o \
+	$(HLDLL_OBJ_DIR)/bot/cs_bot_chatter.o \
+	$(HLDLL_OBJ_DIR)/bot/cs_bot.o \
+	$(HLDLL_OBJ_DIR)/bot/cs_bot_event.o \
+	$(HLDLL_OBJ_DIR)/bot/cs_bot_init.o \
+	$(HLDLL_OBJ_DIR)/bot/cs_bot_learn.o \
+	$(HLDLL_OBJ_DIR)/bot/cs_bot_listen.o \
+	$(HLDLL_OBJ_DIR)/bot/cs_bot_manager.o \
+	$(HLDLL_OBJ_DIR)/bot/cs_bot_nav.o \
+	$(HLDLL_OBJ_DIR)/bot/cs_bot_pathfind.o \
+	$(HLDLL_OBJ_DIR)/bot/cs_bot_radio.o \
+	$(HLDLL_OBJ_DIR)/bot/cs_bot_statemachine.o \
+	$(HLDLL_OBJ_DIR)/bot/cs_bot_update.o \
+	$(HLDLL_OBJ_DIR)/bot/cs_bot_vision.o \
+	$(HLDLL_OBJ_DIR)/bot/cs_bot_weapon.o \
+	$(HLDLL_OBJ_DIR)/bot/cs_gamestate.o \
+	$(HLDLL_OBJ_DIR)/bot/states/cs_bot_attack.o \
+	$(HLDLL_OBJ_DIR)/bot/states/cs_bot_buy.o \
+	$(HLDLL_OBJ_DIR)/bot/states/cs_bot_defuse_bomb.o \
+	$(HLDLL_OBJ_DIR)/bot/states/cs_bot_escape_from_bomb.o \
+	$(HLDLL_OBJ_DIR)/bot/states/cs_bot_fetch_bomb.o \
+	$(HLDLL_OBJ_DIR)/bot/states/cs_bot_follow.o \
+	$(HLDLL_OBJ_DIR)/bot/states/cs_bot_hide.o \
+	$(HLDLL_OBJ_DIR)/bot/states/cs_bot_hunt.o \
+	$(HLDLL_OBJ_DIR)/bot/states/cs_bot_idle.o \
+	$(HLDLL_OBJ_DIR)/bot/states/cs_bot_investigate_noise.o \
+	$(HLDLL_OBJ_DIR)/bot/states/cs_bot_move_to.o \
+	$(HLDLL_OBJ_DIR)/bot/states/cs_bot_plant_bomb.o \
+	$(HLDLL_OBJ_DIR)/bot/states/cs_bot_use_entity.o \
+	$(HLDLL_OBJ_DIR)/hostage/hostage.o \
+	$(HLDLL_OBJ_DIR)/hostage/hostage_improv.o \
+	$(HLDLL_OBJ_DIR)/hostage/hostage_localnav.o \
+	$(HLDLL_OBJ_DIR)/hostage/states/hostage_animate.o \
+	$(HLDLL_OBJ_DIR)/hostage/states/hostage_escape.o \
+	$(HLDLL_OBJ_DIR)/hostage/states/hostage_follow.o \
+	$(HLDLL_OBJ_DIR)/hostage/states/hostage_idle.o \
+	$(HLDLL_OBJ_DIR)/hostage/states/hostage_retreat.o \
+	$(HLDLL_OBJ_DIR)/../engine/unicode_strtools.o
+
+HLWPN_OBJS = \
+	$(HLWPN_OBJ_DIR)/wpn_ak47.o \
+	$(HLWPN_OBJ_DIR)/wpn_aug.o \
+	$(HLWPN_OBJ_DIR)/wpn_awp.o \
+	$(HLWPN_OBJ_DIR)/wpn_c4.o \
+	$(HLWPN_OBJ_DIR)/wpn_deagle.o \
+	$(HLWPN_OBJ_DIR)/wpn_elite.o \
+	$(HLWPN_OBJ_DIR)/wpn_famas.o \
+	$(HLWPN_OBJ_DIR)/wpn_fiveseven.o \
+	$(HLWPN_OBJ_DIR)/wpn_flashbang.o \
+	$(HLWPN_OBJ_DIR)/wpn_g3sg1.o \
+	$(HLWPN_OBJ_DIR)/wpn_galil.o \
+	$(HLWPN_OBJ_DIR)/wpn_glock18.o \
+	$(HLWPN_OBJ_DIR)/wpn_hegrenade.o \
+	$(HLWPN_OBJ_DIR)/wpn_knife.o \
+	$(HLWPN_OBJ_DIR)/wpn_m249.o \
+	$(HLWPN_OBJ_DIR)/wpn_m3.o \
+	$(HLWPN_OBJ_DIR)/wpn_m4a1.o \
+	$(HLWPN_OBJ_DIR)/wpn_mac10.o \
+	$(HLWPN_OBJ_DIR)/wpn_mp5navy.o \
+	$(HLWPN_OBJ_DIR)/wpn_p228.o \
+	$(HLWPN_OBJ_DIR)/wpn_p90.o \
+	$(HLWPN_OBJ_DIR)/wpn_scout.o \
+	$(HLWPN_OBJ_DIR)/wpn_sg550.o \
+	$(HLWPN_OBJ_DIR)/wpn_sg552.o \
+	$(HLWPN_OBJ_DIR)/wpn_smokegrenade.o \
+	$(HLWPN_OBJ_DIR)/wpn_tmp.o \
+	$(HLWPN_OBJ_DIR)/wpn_ump45.o \
+	$(HLWPN_OBJ_DIR)/wpn_usp.o \
+	$(HLWPN_OBJ_DIR)/wpn_xm1014.o 
+
+
+PM_OBJS = $(PM_OBJ_DIR)/pm_shared.o \
+	$(PM_OBJ_DIR)/pm_math.o \
+	$(PM_OBJ_DIR)/pm_debug.o
+
+GAME_SHARED_OBJS = $(GAME_SHARED_OBJ_DIR)/voice_gamemgr.o \
+	$(GAME_SHARED_OBJ_DIR)/shared_util.o \
+	$(GAME_SHARED_OBJ_DIR)/bot/bot.o \
+	$(GAME_SHARED_OBJ_DIR)/bot/bot_manager.o \
+	$(GAME_SHARED_OBJ_DIR)/bot/bot_profile.o \
+	$(GAME_SHARED_OBJ_DIR)/bot/bot_util.o \
+	$(GAME_SHARED_OBJ_DIR)/bot/nav_area.o \
+	$(GAME_SHARED_OBJ_DIR)/bot/nav_file.o \
+	$(GAME_SHARED_OBJ_DIR)/bot/nav_node.o \
+	$(GAME_SHARED_OBJ_DIR)/bot/nav_path.o 
+
+PUBLIC_OBJS = \
+	$(PUBLIC_OBJ_DIR)/MemPool.o \
+	$(PUBLIC_OBJ_DIR)/precompiled.o 
+	
+
+all: dirs hl.$(SHLIBEXT)
+
+dirs:
+	-mkdir $(BUILD_OBJ_DIR)
+	-mkdir $(BUILD_OBJ_DIR)/engine
+	-mkdir $(BUILD_OBJ_DIR)/version
+	-mkdir $(HLDLL_OBJ_DIR)
+	-mkdir $(HLDLL_OBJ_DIR)/bot
+	-mkdir $(HLDLL_OBJ_DIR)/bot/states
+	-mkdir $(HLDLL_OBJ_DIR)/hostage
+	-mkdir $(HLDLL_OBJ_DIR)/hostage/states
+	-mkdir $(HLWPN_OBJ_DIR)
+	-mkdir $(PM_OBJ_DIR)
+	-mkdir $(GAME_SHARED_OBJ_DIR)
+	-mkdir $(GAME_SHARED_OBJ_DIR)/bot
+	-mkdir $(PUBLIC_OBJ_DIR)
+
+hl.$(SHLIBEXT): $(HLDLL_OBJS) $(HLWPN_OBJS) $(PM_OBJS) $(GAME_SHARED_OBJS) $(PUBLIC_OBJS) $(ENGINE_OBJS)
+	$(CC) $(WL_UNDEFINED) $(LDFLAGS) $(SHLIBLDFLAGS) -o $(BUILD_DIR)/$@ $(HLDLL_OBJS) $(HLWPN_OBJS) $(PM_OBJS) $(GAME_SHARED_OBJS) $(PUBLIC_OBJS) $(ENGINE_OBJS) $(LDFLAGS)
+	./gendbg.sh $(BUILD_DIR)/$@
+
+$(HLWPN_OBJ_DIR)/%.o : $(HLWPN_SRC_DIR)/%.cpp
+	$(DO_HLWPN_CC)
+
+$(HLDLL_OBJ_DIR)/%.o : $(HLDLL_SRC_DIR)/%.cpp
+	$(DO_HLDLL_CC)
+
+$(PM_OBJ_DIR)/%.o : $(PM_SRC_DIR)/%.cpp
+	$(DO_PM_CC)
+
+$(GAME_SHARED_OBJ_DIR)/%.o : $(GAME_SHARED_SRC_DIR)/%.cpp
+	$(DO_GAME_SHARED_CC)
+
+$(PUBLIC_OBJ_DIR)/%.o : $(PUBLIC_SRC_DIR)/%.cpp
+	$(DO_PUBLIC_CC)
+
+$(ENGINE_OBJ_DIR)/%.o : $(ENGINE_SRC_DIR)/%.cpp
+	$(DO_ENGINE_CC)
+
+clean:
+	-rm -rf $(GAME_SHARED_OBJ_DIR)
+	-rm -rf $(PM_OBJ_DIR)
+	-rm -rf $(HLWPN_OBJ_DIR)
+	-rm -rf $(HLDLL_OBJ_DIR)
+	-rm -f hl_$(ARCH).$(SHLIBEXT)
