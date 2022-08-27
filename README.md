@@ -1,6 +1,6 @@
 # wg CS 1.6 Client
 
-##Cvars
+## Cvars
 ```
 cl_hudcolor "x x x" -> Change hud color
 ```
