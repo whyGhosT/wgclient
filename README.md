@@ -1,7 +1,8 @@
 # wg CS 1.6 Client
 
-## Cvars
+https://github.com/whyGhosT/cs16-client-fixed fork xd
 
+## Cvars
 ### Hud Cvars
 ![resim](https://user-images.githubusercontent.com/81658277/187086060-b9f5d739-a37d-46b5-95f3-a170bb52c685.png)
 
