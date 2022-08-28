@@ -41,6 +41,7 @@
 #include "pm_shared.h"
 
 extern float g_flRoundTime;
+cvar_t *cl_righthand;
 
 // play a strike sound based on the texture that was hit by the attack traceline.  VecSrc/VecEnd are the
 // original traceline endpoints used by the attacker, iBulletType is the type of bullet that hit the texture.

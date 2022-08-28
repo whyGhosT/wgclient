@@ -65,7 +65,7 @@ void EV_FireAK47( event_args_t *args )
 		EV_MuzzleFlash();
 		if( !gHUD.cl_righthand->value )
 		{
-			EV_GetDefaultShellInfo( args, origin, velocity, ShellVelocity, ShellOrigin, forward, right, up, 20.0, -8.0, -10.0, 0);
+			EV_GetDefaultShellInfo( args, origin, velocity, ShellVelocity, ShellOrigin, forward, right, up, 20.0, -8.0, -10.0 );
 		}
 		else
 		{
