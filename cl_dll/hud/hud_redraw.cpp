@@ -38,6 +38,7 @@ float HUD_GetFOV( void );
 // Think
 void CHud::Think(void)
 {
+	m_Rainbow.Think( );
 	int newfov;
 
 	for( HUDLIST *pList = m_pHudList; pList; pList = pList->pNext )

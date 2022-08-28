@@ -36,7 +36,7 @@ extern "C" {
 #include <windows.h>
 #define HSPRITE int
 #else
-typedef int HSPRITE;	// handle to a graphic
+typedef int HSPRITE; // handle to a graphic
 #endif
 
 #define SCRINFO_SCREENFLASH 1

@@ -253,6 +253,7 @@ void CHud :: Init( void )
 	m_ProgressBar.Init();
 	m_Menu.Init();
 	m_Scoreboard.Init();
+	m_Rainbow.Init( );
 
 	InitRain();
 

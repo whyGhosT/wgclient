@@ -35,6 +35,7 @@
 
 #include "csprite.h"
 #include "cvardef.h"
+#include "rainbow.h"
 
 #define MIN_ALPHA	 100	
 #define	HUDELEM_ACTIVE	1
@@ -968,6 +969,7 @@ public:
 	CHudNVG         m_NVG;
 	CHudRadar       m_Radar;
 	CHudSpectatorGui m_SpectatorGui;
+	CRainbow m_Rainbow;
 
 	// user messages
 	CHudMsgFunc(Damage);

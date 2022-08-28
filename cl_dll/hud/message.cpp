@@ -155,6 +155,10 @@ void CHudMessage::MessageScanNextChar( void )
 	case 0:
 	case 1:
 		destRed = destGreen = destBlue = 0;
+
+		if ( gHUD.m_Rainbow.IsEnabled( ) )
+			gHUD.m_Rainbow.GetRainbowColor( m_parms.x, m_parms.y, srcRed, srcGreen, srcBlue );
+
 		blend = m_parms.fadeBlend;
 		break;
 

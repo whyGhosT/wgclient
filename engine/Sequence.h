@@ -11,27 +11,6 @@
 typedef unsigned char byte;
 #endif
 
-//---------------------------------------------------------------------------
-// client_textmessage_t
-//---------------------------------------------------------------------------
-
-#define CLIENT_TEXTMESAGE_S
-typedef struct client_textmessage_s
-{
-	int		effect;
-	byte	r1, g1, b1, a1;		// 2 colors for effects
-	byte	r2, g2, b2, a2;
-	float	x;
-	float	y;
-	float	fadein;
-	float	fadeout;
-	float	holdtime;
-	float	fxtime;
-	const char *pName;
-	const char *pMessage;
-} client_textmessage_t;
-
-
 //--------------------------------------------------------------------------
 // sequenceDefaultBits_e
 //	
@@ -128,7 +107,6 @@ typedef struct sequenceCommandLine_ sequenceCommandLine_s;
 struct sequenceCommandLine_
 {
 	int						commandType;		// Specifies the type of command
-	client_textmessage_t	clientMessage;		// Text HUD message struct
 	char*					speakerName;		// Targetname of speaking entity
 	char*					listenerName;		// Targetname of entity being spoken to
 	char*					soundFileName;		// Name of sound file to play

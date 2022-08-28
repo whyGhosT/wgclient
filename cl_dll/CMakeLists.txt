@@ -155,6 +155,7 @@ set (HUD_SRCS
 	./hud/death.cpp
 	./hud/saytext.cpp
 	./hud/spectator_gui.cpp
+	./hud/rainbow.cpp
 	./include/hud/ammo.h
 	./include/hud/ammohistory.h
 	./include/hud/health.h
@@ -162,6 +163,7 @@ set (HUD_SRCS
 	./include/hud/hud_iface.h
 	./include/hud/hud_spectator.h
 	./include/hud/radar.h
+	./include/hud/rainbow.h
 )
 
 set (STUDIORENDER_SRCS
