@@ -19,6 +19,7 @@
 #include "studio_event.h" // def. of mstudioevent_t
 #include "r_efx.h"
 #include "event_api.h"
+#include "discord_integration.h"
 
 extern vec3_t v_origin;
 
@@ -146,6 +147,11 @@ void DLLEXPORT HUD_ProcessPlayerState( struct entity_state_s *dst, const struct 
 	if ( dst->number == player->index )
 	{
 		g_iTeamNumber = g_PlayerExtraInfo[dst->number].teamnumber;
+
+			if ( src->iuser1 != 0 )
+				discord_integration::set_state( discord_integration::state::SPECTATING );
+			else if ( g_iUser1 != 0 )
+				discord_integration::set_state( discord_integration::state::PLAYING );
 
 		dst->iuser1 = g_iUser1 = src->iuser1;
 		dst->iuser2 = g_iUser2 = src->iuser2;

@@ -45,6 +45,10 @@ if(CMAKE_SIZEOF_VOID_P MATCHES "8")
 endif()
 endif()
 
+set(BUILD_EXAMPLES OFF CACHE BOOL "build discord-rpc examples" FORCE)
+set(CLANG_FORMAT_SUFFIX "-dummy")
+add_subdirectory(external/discord-rpc)
+
 set (CMAKE_CXX_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} ")
 set (CMAKE_CXX_FLAGS_RELEASE "${CMAKE_C_FLAGS_RELEASE}")
 set (CMAKE_CXX_FLAGS_MINSIZEREL "${CMAKE_C_FLAGS_MINSIZEREL} ")
@@ -198,6 +202,7 @@ set (CLDLL_SOURCES
 	#./input_sdl.cpp
     ./vgui_parser.cpp
     ./unicode_strtools.cpp
+	./discord_integration.cpp
 	./draw_util.cpp
 	./include/camera.h
 	./include/cl_dll.h
@@ -220,6 +225,7 @@ set (CLDLL_SOURCES
 	./include/wrect.h
 	./include/math/neon_mathfun.h
 	./include/math/sse_mathfun.h
+	./include/discord_integration.h
 
 	${PLAYERMOVE_SRCS}
 	${HUD_SRCS}
@@ -240,6 +246,7 @@ include_directories (
 	../dlls/
 	../game_shared/
 	../public/
+	external/discord-rpc/include
 	${SDL2_INCLUDE_DIR})
 add_library (${CLDLL_LIBRARY} SHARED ${CLDLL_SOURCES})
 add_definitions( -D_CS16CLIENT_ENABLE_GSRC_SUPPORT -DCLIENT_WEAPONS -DCLIENT_DLL
@@ -257,3 +264,5 @@ target_link_libraries( ${CLDLL_LIBRARY} ${CMAKE_DL_LIBS} ${SDL2_LIBRARY} )
 set_target_properties (${CLDLL_SHARED} PROPERTIES
 	VERSION 1.6 SOVERSION 1.6
 	POSITION_INDEPENDENT_CODE 1)
+
+target_link_libraries(client discord-rpc)
