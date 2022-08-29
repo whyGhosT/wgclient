@@ -102,6 +102,21 @@ static void handle_autojump( usercmd_t *cmd )
 
 		s_jump_was_down_last_frame = ( ( cmd->buttons & IN_JUMP ) != 0 );
 	}
+
+	static void handle_ducktap(usercmd_t* cmd)
+	{
+		static bool s_duck_was_down_last_frame = false;
+
+		bool should_release_duck = (!player.onground && !player.inwater && player.walking);
+
+		if (s_duck_was_down_last_frame && player.onground && !player.inwater && player.walking)
+				should_release_duck = true;
+
+		if (should_release_duck)
+				cmd->buttons &= ~IN_DUCK;
+
+		s_duck_was_down_last_frame = ((cmd->buttons & IN_DUCK) != 0);
+	}
 }
 
 void update_player_info( int onground, int inwater, int walking )
@@ -157,6 +172,7 @@ kbutton_t	in_alt1;
 kbutton_t	in_score;
 kbutton_t	in_break;
 kbutton_t	in_graph;  // Display the netgraph
+kbutton_t in_ducktap;
 
 struct kblist_t
 {
@@ -429,6 +445,16 @@ void IN_LeftDown(void) {KeyDown(&in_left);}
 void IN_LeftUp(void) {KeyUp(&in_left);}
 void IN_RightDown(void) {KeyDown(&in_right);}
 void IN_RightUp(void) {KeyUp(&in_right);}
+void IN_DucktapUp( void )
+{
+	KeyUp( &in_ducktap );
+}
+void IN_DucktapDown( void )
+{
+	KeyDown( &in_ducktap );
+}
+
+
 
 void IN_ForwardDown(void)
 {
@@ -768,7 +794,13 @@ void DLLEXPORT CL_CreateMove ( float frametime, struct usercmd_s *cmd, int activ
 	//
 	cmd->buttons = CL_ButtonBits( 1 );
 
-	autofuncs::handle_autojump( cmd );
+	if ( in_ducktap.state & 1 )
+	{
+		cmd->buttons |= IN_DUCK;
+		autofuncs::handle_ducktap( cmd ); // Ducktap takes priority over autojump
+	}
+	else 
+		autofuncs::handle_autojump( cmd );
 
 	// Using joystick?
 	if ( in_joystick->value )
@@ -910,6 +942,7 @@ int CL_ButtonBits( int bResetState )
 		in_reload.state &= ~2;
 		in_alt1.state &= ~2;
 		in_score.state &= ~2;
+		in_ducktap.state &= ~2;
 	}
 
 	return bits;
@@ -999,6 +1032,8 @@ void InitInput (void)
 	gEngfuncs.pfnAddCommand ("-graph", IN_GraphUp);
 	gEngfuncs.pfnAddCommand ("+break",IN_BreakDown);
 	gEngfuncs.pfnAddCommand ("-break",IN_BreakUp);
+	gEngfuncs.pfnAddCommand( "+ducktap", IN_DucktapDown );
+	gEngfuncs.pfnAddCommand( "-ducktap", IN_DucktapUp );
 
 	lookstrafe			= gEngfuncs.pfnRegisterVariable ( "lookstrafe", "0", FCVAR_ARCHIVE );
 	lookspring			= gEngfuncs.pfnRegisterVariable ( "lookspring", "0", FCVAR_ARCHIVE );
