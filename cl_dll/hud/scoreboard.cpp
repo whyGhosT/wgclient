@@ -44,20 +44,50 @@ int g_iTeamNumber;
 int xstart, xend;
 int ystart, yend;
 // relative to the side of the scoreboard
-inline int NAME_POS_START()		{ return xstart + 15; }
-inline int NAME_POS_END()		{ return xend - 210; }
+inline int NAME_POS_START( )
+{
+	return xstart + 15;
+}
+inline int NAME_POS_END( )
+{
+	return xend - 230;
+}
 // 10 pixels gap
-inline int ATTRIB_POS_START()	{ return xend - 210; }
-inline int ATTRIB_POS_END()		{ return xend - 150; }
+inline int ATTRIB_POS_START( )
+{
+	return xend - 230;
+}
+inline int ATTRIB_POS_END( )
+{
+	return xend - 170;
+}
 // 10 pixels gap
-inline int KILLS_POS_START()	{ return xend - 140; }
-inline int KILLS_POS_END()		{ return xend - 110; }
+inline int KILLS_POS_START( )
+{
+	return xend - 170;
+}
+inline int KILLS_POS_END( )
+{
+	return xend - 140;
+}
 // 10 pixels gap
-inline int DEATHS_POS_START()	{ return xend - 100; }
-inline int DEATHS_POS_END()		{ return xend - 40; }
+inline int DEATHS_POS_START( )
+{
+	return xend - 130;
+}
+inline int DEATHS_POS_END( )
+{
+	return xend - 70;
+}
 // 20 pixels gap
-inline int PING_POS_START()		{ return xend - 40; }
-inline int PING_POS_END()		{ return xend - 10; }
+inline int PING_POS_START( )
+{
+	return xend - 70;
+}
+inline int PING_POS_END( )
+{
+	return xend - 10;
+}
 
 //#include "vgui_TeamFortressViewport.h"
 
@@ -171,10 +201,10 @@ int CHudScoreboard :: DrawScoreboard( float fTime )
 	else
 		strncpy( ServerName, gHUD.m_Teamplay ? "TEAMS" : "PLAYERS", 80 );
 
-	DrawUtils::DrawHudString( NAME_POS_START(), ypos, NAME_POS_END(), ServerName, 255, 140, 0 );
-	DrawUtils::DrawHudStringReverse( KILLS_POS_END(), ypos, 0, "KILLS", 255, 140, 0 );
-	DrawUtils::DrawHudString( DEATHS_POS_START(), ypos, DEATHS_POS_END(), "DEATHS", 255, 140, 0 );
-	DrawUtils::DrawHudStringReverse( PING_POS_END(), ypos, PING_POS_START(), "PING", 255, 140, 0 );
+	DrawUtils::DrawHudString( NAME_POS_START( ), ypos, NAME_POS_END( ), ServerName, 255, 140, 0 );
+	DrawUtils::DrawHudStringReverse( KILLS_POS_END( ), ypos, 0, "KILLS", 255, 140, 0 );
+	DrawUtils::DrawHudString( DEATHS_POS_START( ), ypos, DEATHS_POS_END( ), "DEATHS", 255, 140, 0 );
+	DrawUtils::DrawHudStringReverse( PING_POS_END( ), ypos, PING_POS_START( ), "P/L", 255, 140, 0 );
 
 	list_slot += 2;
 	ypos = ystart + (list_slot * ROW_GAP);
@@ -389,6 +419,7 @@ int CHudScoreboard :: DrawPlayers( float list_slot, int nameoffset, const char *
 
 		DrawUtils::DrawHudString( NAME_POS_START() + nameoffset, ypos, NAME_POS_END(), pl_info->name, r, g, b );
 
+
 		// draw bomb( if player have the bomb )
 		if( g_PlayerExtraInfo[best_player].dead )
 			DrawUtils::DrawHudString( ATTRIB_POS_START(), ypos, ATTRIB_POS_END(), "Dead", r, g, b );
@@ -414,7 +445,7 @@ int CHudScoreboard :: DrawPlayers( float list_slot, int nameoffset, const char *
 		else
 		{
 			static char buf[64];
-			sprintf( buf, "%d", pl_info->ping );
+			sprintf( buf, "%d/%d", pl_info->ping, pl_info->packetloss );
 			DrawUtils::DrawHudStringReverse( PING_POS_END(), ypos, PING_POS_START(), buf, r, g, b );
 		}
 	
