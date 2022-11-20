@@ -175,6 +175,8 @@ private:
 	int	m_HUD_bucket0;
 	int m_HUD_selection;
 
+	cvar_t *hud_weapon;
+
 	int m_iAlpha;
 	int m_R, m_G, m_B;
 	int m_cvarR, m_cvarG, m_cvarB;
