@@ -46,6 +46,9 @@ void CRainbow::Think()
 
 void CRainbow::GetRainbowColor(int x, int y, int &r, int &g, int &b)
 {
+	if ( m_iDisableStack > 0 )
+		return;
+
     float phase = m_pCvarRainbowSpeed->value * gHUD.m_flTime;
     phase += m_pCvarRainbowXPhase->value * x;
     phase += m_pCvarRainbowYPhase->value * y;
@@ -54,6 +57,17 @@ void CRainbow::GetRainbowColor(int x, int y, int &r, int &g, int &b)
 		phase += 360;
 
     HSVtoRGB(phase, m_flSat, m_flVal, r, g, b);
+}
+
+void CRainbow::PushDisable( )
+{
+	m_iDisableStack++;
+}
+
+void CRainbow::PopDisable( )
+{
+	m_iDisableStack--;
+	assert( m_iDisableStack >= 0 );
 }
 
 void CRainbow::HookFuncs()
