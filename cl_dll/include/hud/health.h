@@ -132,5 +132,4 @@ private:
 	DAMAGE_IMAGE m_dmg[NUM_DMG_TYPES];
 	float m_flTimeFlash;
 	int	m_bitsDamage;
-	cvar_t *cl_radartype;
 };

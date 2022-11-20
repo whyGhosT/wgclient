@@ -30,8 +30,6 @@ public:
 	int MsgFunc_HostageK(const char *pszName, int iSize, void *pbuf);
 private:
 
-	cvar_t *cl_radartype;
-
 	int InitBuiltinTextures();
 	void DrawPlayerLocation();
 	void DrawRadarDot(int x, int y, int r, int g, int b, int a);

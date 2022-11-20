@@ -99,8 +99,6 @@ int CHudRadar::Init()
 
 	m_iFlags = HUD_DRAW;
 
-	cl_radartype = CVAR_CREATE( "cl_radartype", "0", FCVAR_ARCHIVE );
-
 	bTexturesInitialized = bUseRenderAPI = false;
 
 	gHUD.AddHudElem( this );
@@ -294,17 +292,8 @@ int CHudRadar::Draw(float flTime)
 
 	int iTeamNumber = g_PlayerExtraInfo[ gHUD.m_Scoreboard.m_iPlayerNum ].teamnumber;
 	int r, g, b;
-
-	if( cl_radartype->value )
-	{
-		SPR_Set(m_hRadarOpaque.spr, 200, 200, 200);
-		SPR_DrawHoles(0, 0, 0, &m_hRadarOpaque.rect);
-	}
-	else
-	{
-		SPR_Set( m_hRadar.spr, 25, 75, 25 );
-		SPR_DrawAdditive( 0, 0, 0, &m_hRadarOpaque.rect );
-	}
+	SPR_Set( m_hRadar.spr, 25, 75, 25 );
+	SPR_DrawAdditive( 0, 0, 0, &m_hRadarOpaque.rect ); //YAPACAÐINIZ ÝÞÝN AMINA KOYAYIM OROSPU ÇOCUKLARI RAINBOW EKLEYEMIYORUM ANASINI SÝKTÝGÝMÝN DEVELOPERLARI SÝZÝ... XASH DENEN YARRAK GÝBÝ BÝR MOTORU SÝKMEYE GELÝYORUM :))))))))))))))) re-gs<3
 
 	if( bUseRenderAPI )
 	{
