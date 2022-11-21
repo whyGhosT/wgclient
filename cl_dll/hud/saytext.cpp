@@ -306,11 +306,8 @@ void CHudSayText :: SayTextPrint( const char *pszBuf, int iBufSize, int clientIn
 		flScrollTime = gHUD.m_flTime + m_HUD_saytext_time->value;
 	}
 
-	m_iFlags |= HUD_DRAW
-		;
-	if ( m_HUD_saytext_sound->value != 0.0f )
-		PlaySound( "misc/talk.wav", 1 );
-	if ( m_HUD_saytext_sound->value > 0.0f )
+	m_iFlags |= HUD_DRAW;
+	if ( m_HUD_saytext_sound ->	value )
 		PlaySound( m_HUD_saytext_sound_path->string, m_HUD_saytext_sound->value );
 
 	if( !g_iUser1 )
