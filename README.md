@@ -42,3 +42,11 @@ cl_headname "0-1"
 
 #### Discord RPC
 ![resim](https://user-images.githubusercontent.com/81658277/187113567-ef44faf7-0bf9-48e3-8111-b7763f730f09.png)
+
+##Thanks!
+[Weimzh's Client](https://github.com/weimzh/cs16-client)
+[OpenAG](https://github.com/YaLTeR/OpenAG)
+[CSMoe](https://github.com/MoeMod/CSMoE)
+[PonpiK](https://github.com/ponpik)
+[ByOreo](https://github.com/byoreo)
+[HasanDramali](https://github.com/hasandramali)
