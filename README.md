@@ -30,7 +30,7 @@ hud_saytext_sound_path "path"
 cl_autojump "0-1"
 +ducktap
 ```
-#### Other cvars
+#### Other Cvars
 ```
 thirdperson ~ (You can use thirdperson without sv_cheats 1 and multiplayer)
 
