@@ -32,10 +32,12 @@ version.
 #include "draw_util.h"
 #include "triangleapi.h"
 #include <string.h>
+#include "unicode_strtools.h"
 
 float DrawUtils::color[3];
 
 #define IsColorString( p )	( p && *( p ) == '^' && *(( p ) + 1) && *(( p ) + 1) >= '0' && *(( p ) + 1 ) <= '9' )
+#define IsColorStringU32( p ) ( p && *( p ) == U'^' && *( ( p ) + 1 ) && *( ( p ) + 1 ) >= U'0' && *( ( p ) + 1 ) <= U'9' )
 #define ColorIndex( c )	((( c ) - '0' ) & 7 )
 
 // console color typeing
@@ -54,39 +56,43 @@ byte g_color_table[][4] =
 
 int DrawUtils::DrawHudString( int xpos, int ypos, int iMaxX, const char *str, int r, int g, int b, float scale, bool drawing )
 {
-	char *szIt = (char *)str;
-	// draw the string until we hit the null character or a newline character
-	for ( ; *szIt != 0 && *szIt != '\n'; szIt++ )
-	{
-		int next = xpos + gHUD.GetCharWidth((unsigned char)*szIt); // variable-width fonts look cool
-		if ( next > iMaxX )
-			return xpos;
+	if ( !str )
+		return 1;
 
+	uchar32 wstr[1024];
+	Q_UTF8ToUTF32( str, wstr, sizeof( wstr ), STRINGCONVERT_SKIP );
+
+	uchar32 *szIt = wstr;
+
+	// draw the string until we hit the null character or a newline character
+	for ( ; *szIt != 0 && *szIt != L'\n'; szIt++ )
+	{
 		if ( *szIt == '\\' && *( szIt + 1 ) != '\n' && *( szIt + 1 ) != 0 )
 		{
 			// an escape character
 
 			switch ( *( ++szIt ) )
 			{
-			case 'y':
+			case L'y':
 				UnpackRGB( r, g, b, RGB_YELLOWISH );
 				continue;
-			case 'w':
+			case L'w':
 				r = g = b = 255;
 				continue;
-			case 'd':
+			case L'd':
 				continue;
-			case 'R':
+			case L'R':
 				//if( drawing ) return xpos;
 				//return DrawHudStringReverse( iMaxX, ypos, first_xpos, szIt, r, g, b, true ); // set 'drawing' to true, to stop when '\R' is catched
-				xpos = iMaxX - gHUD.GetCharWidth('M') * 10;
-				++szIt;
+				//xpos = iMaxX - gHUD.GetCharWidth('M') * 10;
+				//++szIt;
+				continue;
 			}
 		}
-		else if( IsColorString( szIt ) )
+		else if ( IsColorStringU32( szIt ) )
 		{
 			szIt++;
-			if( gHUD.hud_colored->value )
+			if ( gHUD.hud_colored->value )
 			{
 				r = g_color_table[ColorIndex( *szIt )][0];
 				g = g_color_table[ColorIndex( *szIt )][1];
@@ -289,17 +295,21 @@ void DrawUtils::Draw2DQuad( float x1, float y1, float x2, float y2 )
 int DrawUtils::HudStringLen( const char *szIt, float scale )
 {
 	int l;
+
+	if ( !szIt )
+		return 1;
+
 	// count length until we hit the null character or a newline character
 	for ( l = 0; *szIt != 0 && *szIt != '\n'; szIt++ )
 	{
-		if( szIt[0] == '\\' && szIt[1] != '\n' &&
-			(szIt[1] == 'y' || szIt[1] == 'w' || szIt[1] == 'd' || szIt[1] == 'R') ) // not sure is reversing handled correctly
+		if ( szIt[0] == '\\' && szIt[1] != '\n' &&
+		     ( szIt[1] == 'y' || szIt[1] == 'w' || szIt[1] == 'd' || szIt[1] == 'R' ) ) // not sure is reversing handled correctly
 		{
 			szIt++;
 			continue;
 		}
 
-		if( IsColorString( szIt ) ) // suck down, unreadable nicknames. Check even if hud_colored is off
+		if ( IsColorString( szIt ) ) // suck down, unreadable nicknames. Check even if hud_colored is off
 		{
 			szIt++;
 			continue;

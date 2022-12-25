@@ -841,6 +841,15 @@ private:
 	byte m_menuFlags;
 };
 
+class CHudHeadName : public CHudBase
+{
+public:
+	int Init();
+	int VidInit();
+	int Draw(float flTime);
+	bool CheckForPlayer(cl_entity_s *pEnt);
+};
+
 //
 //-----------------------------------------------------
 //
@@ -942,6 +951,7 @@ public:
 	cvar_t *hud_textmode;
 	cvar_t *hud_colored;
 	cvar_t *sv_skipshield;
+	cvar_t *cl_headname;
 #ifdef __ANDROID__
 	cvar_t *cl_android_force_defaults;
 #endif
@@ -975,6 +985,7 @@ public:
 	CHudRadar       m_Radar;
 	CHudSpectatorGui m_SpectatorGui;
 	CRainbow m_Rainbow;
+	CHudHeadName	m_HeadName;
 
 	// user messages
 	CHudMsgFunc(Damage);

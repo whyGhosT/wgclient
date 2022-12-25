@@ -160,6 +160,8 @@ set (HUD_SRCS
 	./hud/saytext.cpp
 	./hud/spectator_gui.cpp
 	./hud/rainbow.cpp
+	./hud/calcscreen.cpp
+	./hud/headname.cpp
 	./include/hud/ammo.h
 	./include/hud/ammohistory.h
 	./include/hud/health.h
@@ -168,6 +170,7 @@ set (HUD_SRCS
 	./include/hud/hud_spectator.h
 	./include/hud/radar.h
 	./include/hud/rainbow.h
+	./include/hud/calcscreen.h
 )
 
 set (STUDIORENDER_SRCS
