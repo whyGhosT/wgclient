@@ -1,17 +1,44 @@
-# wg CS 1.6 Client
+# wgClient
+### Project for modding CS 1.6 client.dll (Only for Xash3D) (v1.33 based)
+
+## How To Run
+
+**Install For PC**:
+
+- You can download from this [link](https://github.com/whyGhosT/wgclient/releases/download/v0.7/client.dll).
+
+- Replace the X:\..\$XashFolder\cstrike\cl_dlls\client.dll with it.
 
 ## Cvars
-### HUD cvars xD
-![resim](https://user-images.githubusercontent.com/81658277/187086060-b9f5d739-a37d-46b5-95f3-a170bb52c685.png)
+#### HUD Cvars
+```
+hud_color "0-255 0-255 0-255"
 
-![resim](https://user-images.githubusercontent.com/81658277/187086028-810f0c91-af7a-4304-afe7-52cbde32f3d4.png)
+hud_rainbow "0-1"
+hud_rainbow_sat "x"
+hud_rainbow_speed "x"
+hud_rainbow_val "x"
+hud_rainbow_xphase "x.y"
+hud_rainbow_yphase "x.y"
+hud_rainbow_chat "0-1"
 
-![resim](https://user-images.githubusercontent.com/81658277/187211581-7fa72289-5bf4-48de-b67d-b9df70b08463.png)
+hud_saytext_sound "0-1"
+hud_saytext_sound_path "path"
+```
+####Bhop Cvars
+```
+cl_autojump "0-1"
++ducktap
+```
+#### Other cvars
+```
+thirdperson ~ (You can use thirdperson without sv_cheats 1 and multiplayer)
 
-### QW:EwqEW.q.qwWQ:EWQ:eQW.EWQ:wq:Ewq:EWQ
+cl_killsound "0-1"
+cl_killsound_path "path"
 
-![de_dust2_0002](https://user-images.githubusercontent.com/81658277/202551708-f2f87583-d1a9-4e8d-9855-ea0f42e363d0.png)
+cl_headname "0-1"
+```
 
-
-## Discord RPC
+#### Discord RPC
 ![resim](https://user-images.githubusercontent.com/81658277/187113567-ef44faf7-0bf9-48e3-8111-b7763f730f09.png)
