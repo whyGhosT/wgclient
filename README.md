@@ -45,8 +45,13 @@ cl_headname "0-1"
 
 ## Thanks!
 [Weimzh's Client](https://github.com/weimzh/cs16-client)
+
 [OpenAG](https://github.com/YaLTeR/OpenAG)
+
 [CSMoe](https://github.com/MoeMod/CSMoE)
+
 [PonpiK](https://github.com/ponpik)
+
 [ByOreo](https://github.com/byoreo)
+
 [HasanDramali](https://github.com/hasandramali)
