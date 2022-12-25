@@ -25,7 +25,7 @@ hud_rainbow_chat "0-1"
 hud_saytext_sound "0-1"
 hud_saytext_sound_path "path"
 ```
-####Bhop Cvars
+#### Bhop Cvars
 ```
 cl_autojump "0-1"
 +ducktap
