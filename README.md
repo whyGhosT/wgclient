@@ -1,13 +1,30 @@
-# wgClient
+# <p align=center>wgClient
+<p align=center>
+<a>
+    <img alt="Downloads" src="https://img.shields.io/github/downloads/whyghost/wgclient/total">
+    <img alt="Repo Size" src="https://img.shields.io/github/repo-size/whyghost/wgclient">
+    <img alt="Version" src="https://img.shields.io/github/v/release/whyghost/wgclient?include_prereleases">
+    <img alt="Last Commit" src="https://img.shields.io/github/last-commit/whyghost/wgclient">
+    <img alt="Last RLS" src="https://img.shields.io/github/release-date-pre/whyghost/wgclient">
+    <img alt="Platforms" src="https://img.shields.io/badge/platforms-windows-green">
+    <img alt="Fork" src="https://img.shields.io/github/forks/whyghost/wgclient?style=social">
+    <img alt="Star" src="https://img.shields.io/github/stars/whyghost/wgclient?style=social">
+</a>
+</p>
+
 ### Project for modding CS 1.6 client.dll (Only for Xash3D) (v1.33 based)
 
 ## How To Run
 
-**Install For PC**:
+**PC Installation**:
 
 - You can download from this [link](https://github.com/whyGhosT/wgclient/releases/download/v0.7/client.dll).
 
 - Replace the X:\..\$XashFolder\cstrike\cl_dlls\client.dll with it.
+
+**Android Installation**:
+
+- You can check [this](https://github.com/hasandramali/wgclient-android).
 
 ## Cvars
 #### HUD Cvars
