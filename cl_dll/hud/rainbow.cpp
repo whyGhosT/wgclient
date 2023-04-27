@@ -236,4 +236,4 @@ void CRainbow::HSVtoRGB(float H, float S, float V, int &R, int &G, int &B)
     R = (r + m) * 255;
     G = (g + m) * 255;
     B = (b + m) * 255;
-}}
+}
