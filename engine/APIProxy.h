@@ -5,10 +5,6 @@
 #include "netadr.h"
 #include "Sequence.h"
 
-#ifdef _WIN32
-#include "enums.h"
-#endif
-
 #define	MAX_ALIAS_NAME	32
 
 typedef struct cmdalias_s
