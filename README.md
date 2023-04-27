@@ -6,7 +6,7 @@
     <img alt="Version" src="https://img.shields.io/github/v/release/whyghost/wgclient?include_prereleases">
     <img alt="Last Commit" src="https://img.shields.io/github/last-commit/whyghost/wgclient">
     <img alt="Last RLS" src="https://img.shields.io/github/release-date-pre/whyghost/wgclient">
-    <img alt="Platforms" src="https://img.shields.io/badge/platforms-windows-green">
+    <img alt="Platforms" src="https://img.shields.io/badge/platforms-windows | linux-green">
     <img alt="Fork" src="https://img.shields.io/github/forks/whyghost/wgclient?style=social">
     <img alt="Star" src="https://img.shields.io/github/stars/whyghost/wgclient?style=social">
 </a>
@@ -16,13 +16,23 @@
 
 ## How To Run
 
-**PC Installation**:
+### PC Installation:
 
+#### Windows 
+##### (Without Compile)
 - You can download from this [link](https://github.com/whyGhosT/wgclient/releases/download/v0.7/client.dll).
-
 - Replace the X:\..\$XashFolder\cstrike\cl_dlls\client.dll with it.
+##### (Manual)
+- You can create MSVC2017 project with CMake and build them. Check cl_dlls/CMakeLists.txt.
+#### Linux
+##### (Without Compile)
+- **CLIENT.SO WILL BE ADDED**
+##### (Manual)
+- You can now use CMake for linux make build.
+- **If you want build x64 client delete -m32 flag in CMakeLists.txt.**
+- **Don't delete -fPIC flag. If you deleted flag, Discord-RPC will give error and you can't compile.**
 
-**Android Installation**:
+#### Android Installation:
 
 - You can check [this](https://github.com/hasandramali/wgclient-android).
 
