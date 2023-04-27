@@ -26,7 +26,7 @@
 - You can create MSVC2017 project with CMake and build them. Check cl_dlls/CMakeLists.txt.
 #### Linux
 ##### (Without Compile)
-- **CLIENT.SO WILL BE ADDED**
+- You can download from this [link](https://github.com/whyGhosT/wgclient/releases/download/v0.7/client.so).
 ##### (Manual)
 - You can now use CMake for linux make build.
 - **If you want build x64 client delete -m32 flag in CMakeLists.txt.**
