@@ -4,6 +4,7 @@
 #include "archtypes.h"     // DAL
 #include "netadr.h"
 #include "Sequence.h"
+#include "enums.h"
 
 #define	MAX_ALIAS_NAME	32
 
@@ -660,7 +661,7 @@ typedef struct engdata_s
 	struct client_static_s *pcls;			// &cls
 	void (*pfnSV_DropClient)(struct client_s *, qboolean, char *, ...);	// pointer to SV_DropClient
 	void (*pfnNetchan_Transmit)(struct netchan_s *, int, byte *);		// pointer to Netchan_Transmit
-	void (*pfnNET_SendPacket)(int length, void *data, netadr_t to); // &NET_SendPacket
+	void (*pfnNET_SendPacket)(enum netsrc_s sock, int length, void *data, netadr_t to); // &NET_SendPacket
 	struct cvar_s *(*pfnCvarFindVar)(const char *pchName);				// pointer to Cvar_FindVar
 	int *phinstOpenGlEarly;					// &g_hinstOpenGlEarly
 
